@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!--Cabeçalho-->
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/primary_blue"
+        android:gravity="center_vertical">
+
+        <!--Botão de voltar-->
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:tint="@color/white"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!--Título-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOOS"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+
+    <!--Aba de Navegação-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+    <!--Aba voo de Ida-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!--Botão Voo de Ida-->
+           <TextView
+               android:id="@+id/btn_voo_ida"
+               android:layout_width="match_parent"
+               android:layout_height="48dp"
+               android:text="VOO DE IDA"
+               android:textStyle="bold"
+               android:gravity="center"
+               android:background="@color/white"
+               android:textColor="@color/gray"/>
+
+            <!-- Indicador de seleção -->
+            <View
+                android:id="@+id/indicator_voo_ida"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/topaz"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btn_voo_volta"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="VOO DE VOLTA"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/white"
+                android:textColor="@color/gray"/>
+
+                <View
+                    android:id="@+id/indicator_voo_volta"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/topaz"
+                    android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--Informações do filtro-->
+    <TextView
+        android:id="@+id/txt_filter_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/bckground_gray"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:text="@string/filtered_text" />
+
+
+
+    <!-- Lista de voos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_flights"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/btn_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/topaz">
+
+        <Button
+            android:id="@+id/btn_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_weight="1"
+            android:text="FILTRAR"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:drawableStart="@drawable/filter_icon"
+            android:drawablePadding="8dp"
+            android:gravity="center"/>
+
+        <!-- Linha Branca -->
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_sort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_weight="1"
+            android:text="ORDENAR"
+            android:textStyle="bold"
+            android:padding="16dp"/>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

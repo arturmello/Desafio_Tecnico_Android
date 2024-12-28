@@ -1,0 +1,197 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!-- Cabeçalho -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/primary_blue"
+        android:gravity="center_vertical">
+
+        <!-- Botão de voltar -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:contentDescription="Voltar"/>
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filtros"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Botão "LIMPAR" -->
+        <TextView
+            android:id="@+id/btn_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="LIMPAR"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Espaço entre o cabeçalho e o conteúdo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Conteúdo de Filtros -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--Filtro por horário-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="8dp">
+
+        <!--Ícone de Relógio + Título-->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/clock_icon"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Filtrar por Horário"
+                android:textColor="@color/primary_blue"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!--CehckBoxes de Horário-->
+            <CheckBox
+                android:id="@+id/check_morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_filters"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <CheckBox
+                android:id="@+id/check_afternoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_filters2"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <CheckBox
+                android:id="@+id/check_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_filters3"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <CheckBox
+                android:id="@+id/check_dawn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_filters4"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <!-- Separação entre filtros -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <!-- Filtro por Paradas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="8dp">
+            <!--Ícone de Localização + Título-->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/location_icon"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filtrar por Paradas"
+                android:textColor="@color/primary_blue"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+        </LinearLayout>
+
+            <!--CehckBoxes de Paradas-->
+            <CheckBox
+                android:id="@+id/check_direct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_stops"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <CheckBox
+                android:id="@+id/check_one_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/text_by_stops2"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:textColor="@color/gray"/>
+
+            <!-- Botão de Aplicar -->
+            <Button
+                android:id="@+id/btn_apply_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aplicar Filtro"
+                android:backgroundTint="@color/topaz"
+                app:cornerRadius="4dp"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
