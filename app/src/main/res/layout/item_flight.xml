@@ -1,103 +1,177 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:elevation="2dp">
 
-
-    <!-- Origem e Destino -->
-    <TextView
-        android:id="@+id/tv_origin"
-        android:layout_width="wrap_content"
+    <!-- Coluna Esquerda -->
+    <LinearLayout
+        android:id="@+id/flight_info_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="CNF"
-        android:textSize="12sp"
-        android:textColor="@color/gray"
+        android:orientation="vertical"
+        android:gravity="start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        android:layout_marginStart="16dp">
 
-    <TextView
-        android:id="@+id/tv_destination"
-        android:layout_width="wrap_content"
+        <!-- Localidades -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/departure_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CNF"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" — "
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/arrival_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GRU"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+        <!-- Horários -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/departure_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13:30"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" — "
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/arrival_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15:55"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+        <!-- Duração e Paradas -->
+        <TextView
+            android:id="@+id/duration_stops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="1h30, 1 parada"
+            android:textSize="12sp"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <!-- Divisor Vertical -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/divisor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/flight_info_container"
+        app:layout_constraintEnd_toStartOf="@id/price_container" />
+
+    <!-- Coluna Direita -->
+    <LinearLayout
+        android:id="@+id/price_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:text="GRU"
-        android:textColor="@color/gray"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_origin"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1h30, 1 parada"
-        android:textColor="@color/gray"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_departure_time"
-        app:layout_constraintTop_toBottomOf="@+id/tv_departure_time" />
-
-
-    <!-- Horários -->
-    <TextView
-        android:id="@+id/tv_departure_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="13:30"
-        android:textColor="@color/gray"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_origin"
-        app:layout_constraintTop_toBottomOf="@+id/tv_origin" />
-
-
-    <TextView
-        android:id="@+id/tv_arrival_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="15:55"
-        android:textColor="@color/gray"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_destination"
-        app:layout_constraintTop_toBottomOf="@+id/tv_destination" />
-
-    <!-- Preço -->
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="R$144,50"
-        android:textColor="@color/gray"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:orientation="vertical"
+        android:gravity="end"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        android:layout_marginEnd="16dp">
 
-    <!-- Botão -->
-    <Button
-        android:id="@+id/btn_Buy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/topaz"
-        app:cornerRadius="2dp"
-        android:text="Comprar"
-        app:layout_constraintEnd_toEndOf="@+id/tv_price"
-        app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+        <!-- Preço -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Valor total c/ taxas"
-        android:textColor="@color/gray"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_Buy"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Buy" />
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="R$"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray" />
 
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="144,50"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
 
+        <!-- Botão Comprar -->
+
+        <!-- Texto de Taxas -->
+        <Button
+            android:id="@+id/buy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="@color/topaz"
+            android:text="Comprar"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="4dp" />
+
+        <TextView
+            android:id="@+id/total_taxes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor total c/ taxas"
+            android:textSize="12sp"
+            android:textColor="@color/gray" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+

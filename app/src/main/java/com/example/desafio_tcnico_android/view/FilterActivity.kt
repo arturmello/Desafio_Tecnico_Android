@@ -1,4 +1,4 @@
-package com.example.desafio_tcnico_android
+package com.example.desafio_tcnico_android.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.desafio_tcnico_android.R
 
 
 //Configuração para acessar a ela através do Btn Filtros na tela principal
@@ -31,6 +32,8 @@ class FilterActivity : AppCompatActivity() {
             insets
         }
 
+
+
         //Configuração do botão de voltar
         val backButton = findViewById<View>(R.id.btn_back)
         backButton.setOnClickListener {
@@ -48,6 +51,23 @@ class FilterActivity : AppCompatActivity() {
         val directCheckbox = findViewById<CheckBox>(R.id.check_direct)
         val oneStopCheckbox = findViewById<CheckBox>(R.id.check_one_stop)
 
+        // Receber os estados dos filtros enviados pela MainActivity
+        val isMorningSelected = intent.getBooleanExtra("FILTER_MORNING", false)
+        val isAfternoonSelected = intent.getBooleanExtra("FILTER_AFTERNOON", false)
+        val isNightSelected = intent.getBooleanExtra("FILTER_NIGHT", false)
+        val isDawnSelected = intent.getBooleanExtra("FILTER_DAWN", false)
+        val isDirectSelected = intent.getBooleanExtra("FILTER_DIRECT", false)
+        val isOneStopSelected = intent.getBooleanExtra("FILTER_ONE_STOP", false)
+
+        // Atualizar os checkboxes com os estados recebidos
+        morningCheckbox.isChecked = isMorningSelected
+        afternoonCheckbox.isChecked = isAfternoonSelected
+        nightCheckbox.isChecked = isNightSelected
+        dawnCheckbox.isChecked = isDawnSelected
+        directCheckbox.isChecked = isDirectSelected
+        oneStopCheckbox.isChecked = isOneStopSelected
+
+
         //Configurar ação do botão LIMPAR
         clearButton.setOnClickListener {
             morningCheckbox.isChecked = false
@@ -56,6 +76,22 @@ class FilterActivity : AppCompatActivity() {
             dawnCheckbox.isChecked = false
             directCheckbox.isChecked = false
             oneStopCheckbox.isChecked = false
+        }
+        // Botão Aplicar Filtro
+        val applyFilterButton = findViewById<Button>(R.id.btn_apply_filter)
+        applyFilterButton.setOnClickListener {
+            // Intent para passar os filtros selecionados
+            val intent = Intent()
+            intent.putExtra("FILTER_MORNING", morningCheckbox.isChecked)
+            intent.putExtra("FILTER_AFTERNOON", afternoonCheckbox.isChecked)
+            intent.putExtra("FILTER_NIGHT", nightCheckbox.isChecked)
+            intent.putExtra("FILTER_DAWN", dawnCheckbox.isChecked)
+            intent.putExtra("FILTER_DIRECT", directCheckbox.isChecked)
+            intent.putExtra("FILTER_ONE_STOP", oneStopCheckbox.isChecked)
+
+            // Retornar para a tela principal com os filtros
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
 }

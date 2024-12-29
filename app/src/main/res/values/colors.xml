@@ -7,4 +7,7 @@
     <color name="primary_blue">#2d8abd</color>
     <color name="bckground_gray">#e7edf3</color>
     <color name="transparent">#00000000</color>
+    <color name="ifen_gray">#dfdfdf</color>
+    <color name="divisor">#e1e1e1</color>
+
 </resources>

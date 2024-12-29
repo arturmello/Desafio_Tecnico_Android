@@ -187,7 +187,7 @@
             <Button
                 android:id="@+id/btn_apply_filter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:text="Aplicar Filtro"
                 android:backgroundTint="@color/topaz"
                 app:cornerRadius="4dp"

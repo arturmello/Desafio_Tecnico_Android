@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Desafio_Técnico_Android</string>
-    <string name="filtered_text">Com filtro: <b>578</b> voos</string>
+    <string name="filtered_text">Com filtro: <b>0</b> voos</string>
 
     <!--Strings do filtro de Horários-->
     <string name="text_by_filters"><b>MANHÃ</b> - 06:00 - 11:59 (27 VOOS</string>

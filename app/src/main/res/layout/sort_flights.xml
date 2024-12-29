@@ -8,6 +8,7 @@
 
     <!--Cabeçalho-->
     <RelativeLayout
+        android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/primary_blue"
@@ -15,6 +16,7 @@
 
         <!--Botão de voltar-->
         <ImageView
+            android:id="@+id/btn_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="12dp"
@@ -33,12 +35,18 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_centerInParent="true"/>
-    </RelativeLayout>
 
-    <!--Espaço entre o cabeçalho e o conteúdo-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="16dp"/>
+        <TextView
+            android:id="@+id/btn_clear_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIMPAR"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
     <!--Conteúdo-->
     <LinearLayout
@@ -71,6 +79,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/primary_blue"
                 android:textSize="16sp"/>
+
         </LinearLayout>
 
 
@@ -80,38 +89,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="15dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="8dp">
 
+            <!-- RadioButtons -->
             <RadioButton
                 android:id="@+id/radio_highest_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/topaz"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_btn_bg"
                 android:text="Maior preço"
-                android:textColor="@color/gray"/>
+                android:drawablePadding="8dp"/>
+
 
             <RadioButton
                 android:id="@+id/radio_lowest_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/topaz"
                 android:text="Menor preço"
-                android:textColor="@color/gray"/>
+                android:button="@null"
+                android:drawableStart="@drawable/radio_btn_bg"
+                android:drawablePadding="8dp"/>
 
             <RadioButton
                 android:id="@+id/radio_lowest_price_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/topaz"
-                android:text="Menor Preço e Menor tempo de voo"
-                android:textColor="@color/gray"/>
+                android:drawablePadding="8dp"
+                android:button="@null"
+                android:drawableStart="@drawable/radio_btn_bg"
+                android:text="Menor Preço e Menor tempo de voo" />
         </RadioGroup>
+
 
         <!--Botão para Aplicar-->
         <Button
             android:id="@+id/btn_apply_sort"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Aplicar ordenação"
             android:backgroundTint="@color/topaz"
             android:layout_marginTop="16dp"

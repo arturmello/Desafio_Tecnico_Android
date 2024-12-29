@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Desafio_Técnico_Android"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +23,12 @@
         </activity>
 
         <activity
-            android:name="com.example.desafio_tcnico_android.FilterActivity"
+            android:name="com.example.desafio_tcnico_android.view.FilterActivity"
             android:exported="true" />
+
+        <activity
+            android:name="com.example.desafio_tcnico_android.view.SortActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
