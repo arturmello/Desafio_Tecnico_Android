@@ -4,8 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.desafio_tcnico_android.model.Flight
-import com.example.desafio_tcnico_android.model.OTA
-import com.example.desafio_tcnico_android.model.Pricing
 import com.example.desafio_tcnico_android.network.ApiClient
 import com.example.desafio_tcnico_android.network.FlightApiService
 import kotlinx.coroutines.launch
@@ -13,6 +11,15 @@ import kotlinx.coroutines.launch
 class SharedViewModel : ViewModel() {
     val flights = MutableLiveData<List<Flight>>()
     private val originalFlights = mutableListOf<Flight>()
+
+    val isMorningSelected = MutableLiveData(false)
+    val isAfternoonSelected = MutableLiveData(false)
+    val isNightSelected = MutableLiveData(false)
+    val isDawnSelected = MutableLiveData(false)
+    val isDirectSelected = MutableLiveData(false)
+    val isOneStopSelected = MutableLiveData(false)
+
+    val selectedSortOption = MutableLiveData("default")
 
     fun fetchFlights() {
         viewModelScope.launch {
@@ -44,38 +51,6 @@ class SharedViewModel : ViewModel() {
     }
 
     fun resetFlights() {
-        flights.value = originalFlights.toList()
+        flights.value = originalFlights.map { it.copy() }
     }
-
-    private fun getMockedFlights(): List<Flight> {
-        return listOf(
-            Flight(
-                stops = 0,
-                airline = "Mock Airline 1",
-                duration = 120,
-                flightNumber = "MK123",
-                from = "GRU",
-                to = "RIO",
-                departureDate = "2025-01-02T08:00:00",
-                arrivalDate = "2025-01-02T10:00:00",
-                pricing = Pricing(OTA(fareTotal = 150.0, saleTotal = 200.0)),
-                direction = "IDA"
-            ),
-            Flight(
-                stops = 1,
-                airline = "Mock Airline 2",
-                duration = 180,
-                flightNumber = "MK456",
-                from = "RIO",
-                to = "GRU",
-                departureDate = "2025-01-02T14:00:00",
-                arrivalDate = "2025-01-02T17:00:00",
-                pricing = Pricing(OTA(fareTotal = 120.0, saleTotal = 150.0)),
-                direction = "VOLTA"
-            )
-        )
-    }
-
-
-
 }

@@ -26,17 +26,24 @@ class FilterActivity : AppCompatActivity() {
 
         // Inicializar o SharedViewModel
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-        val flightList = sharedViewModel.flights.value ?: emptyList()
 
         // Inicializar os componentes CheckBox
         initializeUI()
 
-        // Atualizar os contadores de filtros
+        // Observar mudanças na lista de voos
+        sharedViewModel.flights.observe(this) { flightList ->
+            updateFilterCounts(flightList)
+        }
+
+        //Atualizar qtd de voos por filtro
+        val flightList = sharedViewModel.flights.value ?: emptyList()
         updateFilterCounts(flightList)
 
         // Configurar botões
         configureButtons()
     }
+
+
 
     private fun initializeUI() {
         morningCheckBox = findViewById(R.id.check_morning)
@@ -45,6 +52,14 @@ class FilterActivity : AppCompatActivity() {
         dawnCheckBox = findViewById(R.id.check_dawn)
         directCheckBox = findViewById(R.id.check_direct)
         oneStopCheckBox = findViewById(R.id.check_one_stop)
+
+        // Carregar estados salvos
+        morningCheckBox.isChecked = sharedViewModel.isMorningSelected.value ?: false
+        afternoonCheckBox.isChecked = sharedViewModel.isAfternoonSelected.value ?: false
+        nightCheckBox.isChecked = sharedViewModel.isNightSelected.value ?: false
+        dawnCheckBox.isChecked = sharedViewModel.isDawnSelected.value ?: false
+        directCheckBox.isChecked = sharedViewModel.isDirectSelected.value ?: false
+        oneStopCheckBox.isChecked = sharedViewModel.isOneStopSelected.value ?: false
     }
 
     private fun configureButtons() {
@@ -54,7 +69,9 @@ class FilterActivity : AppCompatActivity() {
 
         backButton.setOnClickListener { finish() }
         clearButton.setOnClickListener { clearFilters() }
-        applyFilterButton.setOnClickListener { applyFilters() }
+        applyFilterButton.setOnClickListener {
+            applyFilters()
+        }
     }
 
     private fun clearFilters() {
@@ -64,6 +81,13 @@ class FilterActivity : AppCompatActivity() {
         dawnCheckBox.isChecked = false
         directCheckBox.isChecked = false
         oneStopCheckBox.isChecked = false
+
+        sharedViewModel.isMorningSelected.value = false
+        sharedViewModel.isAfternoonSelected.value = false
+        sharedViewModel.isNightSelected.value = false
+        sharedViewModel.isDawnSelected.value = false
+        sharedViewModel.isDirectSelected.value = false
+        sharedViewModel.isOneStopSelected.value = false
 
         Toast.makeText(this, "Filtros Limpos", Toast.LENGTH_SHORT).show()
     }
@@ -85,7 +109,15 @@ class FilterActivity : AppCompatActivity() {
         oneStopCheckBox.text = "1 Parada ($oneStopCount ${if (oneStopCount == 1) "Voo" else "Voos"})"
     }
 
+
     private fun applyFilters() {
+        sharedViewModel.isMorningSelected.value = morningCheckBox.isChecked
+        sharedViewModel.isAfternoonSelected.value = afternoonCheckBox.isChecked
+        sharedViewModel.isNightSelected.value = nightCheckBox.isChecked
+        sharedViewModel.isDawnSelected.value = dawnCheckBox.isChecked
+        sharedViewModel.isDirectSelected.value = directCheckBox.isChecked
+        sharedViewModel.isOneStopSelected.value = oneStopCheckBox.isChecked
+
         val intent = Intent().apply {
             putExtra("FILTER_MORNING", morningCheckBox.isChecked)
             putExtra("FILTER_AFTERNOON", afternoonCheckBox.isChecked)
@@ -98,4 +130,5 @@ class FilterActivity : AppCompatActivity() {
         setResult(RESULT_OK, intent)
         finish()
     }
+
 }

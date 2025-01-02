@@ -35,6 +35,13 @@ class SortActivity : AppCompatActivity() {
         highestPrice = findViewById(R.id.radio_highest_price)
         lowestPrice = findViewById(R.id.radio_lowest_price)
         lowestPriceTime = findViewById(R.id.radio_lowest_price_time)
+
+        when (sharedViewModel.selectedSortOption.value) {
+            "highest_price" -> highestPrice.isChecked = true
+            "lowest_price" -> lowestPrice.isChecked = true
+            "lowest_price_time" -> lowestPriceTime.isChecked = true
+            else -> radioGroup.clearCheck()
+        }
     }
 
     private fun configureButtons() {
@@ -49,6 +56,8 @@ class SortActivity : AppCompatActivity() {
 
     private fun clearSort() {
         radioGroup.clearCheck()
+        sharedViewModel.selectedSortOption.value = "default"
+
         Toast.makeText(this, "Ordenação padrão aplicada", Toast.LENGTH_SHORT).show()
     }
 
@@ -59,6 +68,8 @@ class SortActivity : AppCompatActivity() {
             lowestPriceTime.isChecked -> "lowest_price_time"
             else -> "default"
         }
+
+        sharedViewModel.selectedSortOption.value = selectedSort
 
         val resultIntent = Intent().apply {
             putExtra("SORT_CRITERIA", selectedSort)

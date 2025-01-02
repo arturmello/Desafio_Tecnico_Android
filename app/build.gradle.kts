@@ -50,10 +50,27 @@ dependencies {
     implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation(libs.androidx.lifecycle.livedata.ktx.v261)
+
+    testImplementation (libs.junit)
+    testImplementation (libs.androidx.core.testing) // InstantTaskExecutorRule
+    testImplementation (libs.kotlinx.coroutines.test.v173) // Teste com corrotinas
+
+    // Testes Instrumentados
+    androidTestImplementation (libs.androidx.junit.v115)
+    androidTestImplementation (libs.androidx.espresso.core.v351)
+
+    // Testes instrumentados
+    androidTestImplementation (libs.androidx.junit)
+    androidTestImplementation (libs.androidx.espresso.core)
+
+    // Idling resources (opcional, usado para sincronizar testes)
+    androidTestImplementation (libs.androidx.espresso.idling.resource)
+
+    // Test runner
+    androidTestImplementation (libs.androidx.rules)
 
 }
