@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema principal do aplicativo -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Ajuste para evitar sobreposição -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <!-- Cor de fundo da barra de status -->
+        <item name="android:statusBarColor">@color/primary_blue</item>
+        <!-- Cor de fundo da barra de navegação (opcional) -->
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+</resources>

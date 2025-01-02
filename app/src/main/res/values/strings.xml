@@ -3,14 +3,14 @@
     <string name="filtered_text">Com filtro: <b>0</b> voos</string>
 
     <!--Strings do filtro de Horários-->
-    <string name="text_by_filters"><b>MANHÃ</b> - 06:00 - 11:59 (27 VOOS</string>
-    <string name="text_by_filters2"><b>TARDE</b> - 12:00 - 17:59 (26 VOOS)</string>
-    <string name="text_by_filters3"><b>NOITE</b> - 18:00 - 23:59 (9 VOOS)</string>
-    <string name="text_by_filters4"><b>MADRUGADA</b> - 00:00 - 05:59 (1 VOO)</string>
+    <string name="txt_morning_count"><b>MANHÃ</b> - 06:00 - 11:59 (27 VOOS)</string>
+    <string name="txt_afternoon_count"><b>TARDE</b> - 12:00 - 17:59 (26 VOOS)</string>
+    <string name="txt_night_count"><b>NOITE</b> - 18:00 - 23:59 (9 VOOS)</string>
+    <string name="txt_dawn_count"><b>MADRUGADA</b> - 00:00 - 05:59 (1 VOO)</string>
 
     <!--Strings do filtro de paradas-->
-    <string name="text_by_stops"><b>VOO DIRETO</b> (100 VOOS)</string>
-    <string name="text_by_stops2"><b>1 PARADA</b> (55 VOOS)</string>
+    <string name="txt_direct_count"><b>VOO DIRETO</b> (100 VOOS)</string>
+    <string name="txt_one_stop_count"><b>1 PARADA</b> (55 VOOS)</string>
 
 
 </resources>

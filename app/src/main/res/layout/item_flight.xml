@@ -7,83 +7,102 @@
     android:padding="8dp"
     android:elevation="2dp">
 
-    <!-- Coluna Esquerda -->
+    <!-- Informações do voo -->
     <LinearLayout
         android:id="@+id/flight_info_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:orientation="vertical"
-        android:gravity="start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        android:layout_marginStart="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Número do voo -->
+        <TextView
+            android:id="@+id/flight_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Voo AD2570"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Nome da companhia aérea -->
+        <TextView
+            android:id="@+id/airline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Azul Linhas Aéreas"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
 
         <!-- Localidades -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/departure_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CNF"
-                android:textStyle="bold"
+                android:textColor="@color/gray"
                 android:textSize="12sp"
-                android:textColor="@color/gray" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" — "
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/arrival_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GRU"
-                android:textStyle="bold"
+                android:textColor="@color/gray"
                 android:textSize="12sp"
-                android:textColor="@color/gray" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Horários -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/departure_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="13:30"
-                android:textStyle="bold"
+                android:textColor="@color/gray"
                 android:textSize="16sp"
-                android:textColor="@color/gray" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" — "
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/arrival_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="15:55"
-                android:textStyle="bold"
+                android:textColor="@color/gray"
                 android:textSize="16sp"
-                android:textColor="@color/gray" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Duração e Paradas -->
@@ -91,64 +110,35 @@
             android:id="@+id/duration_stops"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:text="1h30, 1 parada"
+            android:textColor="@color/gray"
             android:textSize="12sp"
-            android:textColor="@color/gray" />
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Divisor Vertical -->
-    <View
-        android:id="@+id/divider"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divisor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/flight_info_container"
-        app:layout_constraintEnd_toStartOf="@id/price_container" />
 
-    <!-- Coluna Direita -->
+
+    <!-- Preço e ações -->
     <LinearLayout
         android:id="@+id/price_container"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/divider"
         android:layout_marginEnd="16dp">
 
+
         <!-- Preço -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="4dp">
-
-            <TextView
-                android:id="@+id/currency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="R$"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/gray" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="144,50"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="@color/gray"
-                android:layout_marginStart="4dp" />
-        </LinearLayout>
+            android:text="R$ 180,50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/gray" />
 
         <!-- Botão Comprar -->
 
@@ -157,7 +147,7 @@
             android:id="@+id/buy_button"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/topaz"
             android:text="Comprar"
             android:textColor="@android:color/white"
@@ -169,9 +159,9 @@
             android:id="@+id/total_taxes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Valor total c/ taxas"
             android:textSize="12sp"
             android:textColor="@color/gray" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-

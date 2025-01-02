@@ -2,96 +2,100 @@ package com.example.desafio_tcnico_android.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowInsets
-import android.widget.Button
-import android.widget.CheckBox
-import androidx.annotation.RequiresApi
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.desafio_tcnico_android.R
+import com.example.desafio_tcnico_android.model.Flight
+import com.example.desafio_tcnico_android.viewmodel.SharedViewModel
 
-
-//Configuração para acessar a ela através do Btn Filtros na tela principal
 class FilterActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
-    @RequiresApi(Build.VERSION_CODES.R)
+
+    private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var morningCheckBox: CheckBox
+    private lateinit var afternoonCheckBox: CheckBox
+    private lateinit var nightCheckBox: CheckBox
+    private lateinit var dawnCheckBox: CheckBox
+    private lateinit var directCheckBox: CheckBox
+    private lateinit var oneStopCheckBox: CheckBox
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.filter_flights)
 
-        // Ajustar o cabeçalho para evitar sobreposição com a barra de status
-        val headerLayout = findViewById<View>(R.id.header_layout)
-        headerLayout.setOnApplyWindowInsetsListener { view, insets ->
-            val systemBarsInsets = insets.getInsets(WindowInsets.Type.systemBars())
-            val params = view.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = systemBarsInsets.top
-            view.layoutParams = params
-            insets
-        }
+        // Inicializar o SharedViewModel
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        val flightList = sharedViewModel.flights.value ?: emptyList()
 
+        // Inicializar os componentes CheckBox
+        initializeUI()
 
+        // Atualizar os contadores de filtros
+        updateFilterCounts(flightList)
 
-        //Configuração do botão de voltar
-        val backButton = findViewById<View>(R.id.btn_back)
-        backButton.setOnClickListener {
-            finish()
-        }
+        // Configurar botões
+        configureButtons()
+    }
 
-        //Botão LIMPAR
-        val clearButton = findViewById<View>(R.id.btn_clear)
+    private fun initializeUI() {
+        morningCheckBox = findViewById(R.id.check_morning)
+        afternoonCheckBox = findViewById(R.id.check_afternoon)
+        nightCheckBox = findViewById(R.id.check_night)
+        dawnCheckBox = findViewById(R.id.check_dawn)
+        directCheckBox = findViewById(R.id.check_direct)
+        oneStopCheckBox = findViewById(R.id.check_one_stop)
+    }
 
-        //Checkboxes
-        val morningCheckbox = findViewById<CheckBox>(R.id.check_morning)
-        val afternoonCheckbox = findViewById<CheckBox>(R.id.check_afternoon)
-        val nightCheckbox = findViewById<CheckBox>(R.id.check_night)
-        val dawnCheckbox = findViewById<CheckBox>(R.id.check_dawn)
-        val directCheckbox = findViewById<CheckBox>(R.id.check_direct)
-        val oneStopCheckbox = findViewById<CheckBox>(R.id.check_one_stop)
-
-        // Receber os estados dos filtros enviados pela MainActivity
-        val isMorningSelected = intent.getBooleanExtra("FILTER_MORNING", false)
-        val isAfternoonSelected = intent.getBooleanExtra("FILTER_AFTERNOON", false)
-        val isNightSelected = intent.getBooleanExtra("FILTER_NIGHT", false)
-        val isDawnSelected = intent.getBooleanExtra("FILTER_DAWN", false)
-        val isDirectSelected = intent.getBooleanExtra("FILTER_DIRECT", false)
-        val isOneStopSelected = intent.getBooleanExtra("FILTER_ONE_STOP", false)
-
-        // Atualizar os checkboxes com os estados recebidos
-        morningCheckbox.isChecked = isMorningSelected
-        afternoonCheckbox.isChecked = isAfternoonSelected
-        nightCheckbox.isChecked = isNightSelected
-        dawnCheckbox.isChecked = isDawnSelected
-        directCheckbox.isChecked = isDirectSelected
-        oneStopCheckbox.isChecked = isOneStopSelected
-
-
-        //Configurar ação do botão LIMPAR
-        clearButton.setOnClickListener {
-            morningCheckbox.isChecked = false
-            afternoonCheckbox.isChecked = false
-            nightCheckbox.isChecked = false
-            dawnCheckbox.isChecked = false
-            directCheckbox.isChecked = false
-            oneStopCheckbox.isChecked = false
-        }
-        // Botão Aplicar Filtro
+    private fun configureButtons() {
+        val backButton = findViewById<ImageView>(R.id.btn_back)
+        val clearButton = findViewById<TextView>(R.id.btn_clear)
         val applyFilterButton = findViewById<Button>(R.id.btn_apply_filter)
-        applyFilterButton.setOnClickListener {
-            // Intent para passar os filtros selecionados
-            val intent = Intent()
-            intent.putExtra("FILTER_MORNING", morningCheckbox.isChecked)
-            intent.putExtra("FILTER_AFTERNOON", afternoonCheckbox.isChecked)
-            intent.putExtra("FILTER_NIGHT", nightCheckbox.isChecked)
-            intent.putExtra("FILTER_DAWN", dawnCheckbox.isChecked)
-            intent.putExtra("FILTER_DIRECT", directCheckbox.isChecked)
-            intent.putExtra("FILTER_ONE_STOP", oneStopCheckbox.isChecked)
 
-            // Retornar para a tela principal com os filtros
-            setResult(RESULT_OK, intent)
-            finish()
+        backButton.setOnClickListener { finish() }
+        clearButton.setOnClickListener { clearFilters() }
+        applyFilterButton.setOnClickListener { applyFilters() }
+    }
+
+    private fun clearFilters() {
+        morningCheckBox.isChecked = false
+        afternoonCheckBox.isChecked = false
+        nightCheckBox.isChecked = false
+        dawnCheckBox.isChecked = false
+        directCheckBox.isChecked = false
+        oneStopCheckBox.isChecked = false
+
+        Toast.makeText(this, "Filtros Limpos", Toast.LENGTH_SHORT).show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateFilterCounts(flightList: List<Flight>) {
+        val morningCount = flightList.count { it.departureDate.substring(11, 13).toInt() in 6..11 }
+        val afternoonCount = flightList.count { it.departureDate.substring(11, 13).toInt() in 12..17 }
+        val nightCount = flightList.count { it.departureDate.substring(11, 13).toInt() in 18..23 }
+        val dawnCount = flightList.count { it.departureDate.substring(11, 13).toInt() in 0..5 }
+        val directCount = flightList.count { it.stops == 0 }
+        val oneStopCount = flightList.count { it.stops == 1 }
+
+        morningCheckBox.text = "Manhã (06:00 às 11:59) ($morningCount ${if (morningCount == 1) "Voo" else "Voos"})"
+        afternoonCheckBox.text = "Tarde (12:00 às 17:59) ($afternoonCount ${if (afternoonCount == 1) "Voo" else "Voos"})"
+        nightCheckBox.text = "Noite (18:00 às 23:59) ($nightCount ${if (nightCount == 1) "Voo" else "Voos"})"
+        dawnCheckBox.text = "Madrugada (00:00 às 05:59) ($dawnCount ${if (dawnCount == 1) "Voo" else "Voos"})"
+        directCheckBox.text = "Voo Direto ($directCount ${if (directCount == 1) "Voo" else "Voos"})"
+        oneStopCheckBox.text = "1 Parada ($oneStopCount ${if (oneStopCount == 1) "Voo" else "Voos"})"
+    }
+
+    private fun applyFilters() {
+        val intent = Intent().apply {
+            putExtra("FILTER_MORNING", morningCheckBox.isChecked)
+            putExtra("FILTER_AFTERNOON", afternoonCheckBox.isChecked)
+            putExtra("FILTER_NIGHT", nightCheckBox.isChecked)
+            putExtra("FILTER_DAWN", dawnCheckBox.isChecked)
+            putExtra("FILTER_DIRECT", directCheckBox.isChecked)
+            putExtra("FILTER_ONE_STOP", oneStopCheckBox.isChecked)
         }
+
+        setResult(RESULT_OK, intent)
+        finish()
     }
 }
